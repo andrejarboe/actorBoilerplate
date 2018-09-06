@@ -9,9 +9,8 @@ const BlogPage = ({ data }) => (
         return (
           <div key={post.node.id}>
             <h3>{post.node.frontmatter.title}</h3>
-            <br />
-            <br />
-            <Link to={post.node.frontmatter.title}>Read More</Link>
+            <p>{post.node.frontmatter.date}</p>
+            <Link to={post.node.frontmatter.date}>Read More</Link>
             <br />
             <br />
             <hr />
@@ -31,7 +30,7 @@ export const pageQuery = graphql`
           frontmatter {
             title
             layout
-            date
+            date(formatString: "MMMM DD, YYYY")
             path
           }
         }
