@@ -10,7 +10,7 @@ const BlogPage = ({ data }) => (
           <div key={post.node.id}>
             <h3>{post.node.frontmatter.title}</h3>
             <p>{post.node.frontmatter.date}</p>
-            <Link to={post.node.frontmatter.date}>Read More</Link>
+            {/* <Link to={post.fields.slug}>Read More</Link> */}
             <br />
             <br />
             <hr />
@@ -31,7 +31,6 @@ export const pageQuery = graphql`
             title
             layout
             date(formatString: "MMMM DD, YYYY")
-            path
           }
         }
       }
