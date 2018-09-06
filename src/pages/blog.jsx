@@ -29,7 +29,6 @@ export const pageQuery = graphql`
           id
           frontmatter {
             title
-            layout
             date(formatString: "MMMM DD, YYYY")
           }
         }
