@@ -6,14 +6,14 @@ media_folder: static/images
 public_folder: /images
 
 collections:
-  - name: 'blog'
-    label: 'Blog'
-    folder: 'content/blogPost'
+  - name: "blog"
+    label: "Blog"
+    folder: "content/blogPost"
     create: true
-    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields: # The fields for each document, usually in front matter
-      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'blog' }
-      - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
-      - { label: 'Featured Image', name: 'thumbnail', widget: 'image' }
-      - { label: 'Body', name: 'body', widget: 'markdown' }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "blog" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Featured Image", name: "thumbnail", widget: "image" }
+      - { label: "Body", name: "body", widget: "markdown" }
