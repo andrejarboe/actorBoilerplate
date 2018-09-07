@@ -12,6 +12,8 @@ const BlogPage = ({ data }) => (
           <div key={post.node.id}>
             <h3>{post.node.frontmatter.title}</h3>
             <p>{post.node.frontmatter.date}</p>
+            <p>Id:</p>
+            <p>{post.node.id}</p>
             <Link to={post.node.frontmatter.path}>Read More</Link>
             <br />
             <br />
