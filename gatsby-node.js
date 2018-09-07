@@ -6,39 +6,52 @@
 
 // You can delete this file if you're not using it
 
-const path = require('path')
+const path = require('path');
+const { createFilePath } = require("gatsby-source-filesystem");
 
-exports.createPages = ({ boundActionCreators, graphql }) => {
-  const { createPage } = boundActionCreators
+exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
+  const { createNodeField } = boundActionCreators;
+  if (node.internal.type === "MarkdownRemark") {
+    const slug = createFilePath({
+      node,
+      getNode,
+      basePath: "posts"
+    });
 
-  const postTemplate = path.resolve('src/templates/blogPost.jsx')
+    createNodeField({
+      node,
+      name: "slug",
+      value: `${slug}`
+    });
+  }
+};
 
-  return graphql(`
-    {
-      allMarkdownRemark {
-        edges {
-          node {
-            html
-            id
-            frontmatter {
-              path
-              title
-              date
+exports.createPages = ({ graphql, boundActionCreators }) => {
+  const { createPage } = boundActionCreators;
+  return new Promise((resolve, reject) => {
+    graphql(`
+      {
+        allMarkdownRemark {
+          edges {
+            node {
+              fields {
+                slug
+              }
             }
           }
         }
       }
-    }
-  `).then(res => {
-    if (res.errors) {
-      return Promise.reject(res.errors)
-    }
-
-    res.data.allMarkdownRemark.edges.forEach(({ node }) => {
-      createPage({
-        path: node.frontmatter.date,
-        component: postTemplate,
-      })
-    })
-  })
-}
+    `).then(result => {
+        result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+            createPage({
+                path: node.fields.slug,
+                component: path.resolve('./src/templates/blogPost.jsx'),
+                context: {
+                    slug: node.fields.slug
+                }
+            });
+        });
+        resolve();
+    });
+  });
+};

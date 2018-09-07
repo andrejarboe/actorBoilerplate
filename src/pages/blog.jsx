@@ -6,20 +6,20 @@ const BlogPage = ({ data }) => (
     <h1>"Actors's Name" latest Blog Post</h1>
     {data.allMarkdownRemark.edges.map(post => {
       if (post.node.frontmatter.layout === 'blog') {
-
-        console.log(post);
+        console.log(post)
         return (
           <div key={post.node.id}>
             <h3>{post.node.frontmatter.title}</h3>
             <p>{post.node.frontmatter.date}</p>
-            <Link to={post.node.frontmatter.date}>Read More</Link>
+            <p>Id:</p>
+            <p>{post.node.frontmatter.date}</p>
+            <Link to={post.node.fields.slug}>Read More</Link>
             <br />
             <br />
             <hr />
           </div>
         )
-      }
-      else{
+      } else {
         return <h3>No blog Post</h3>
       }
     })}
@@ -32,11 +32,14 @@ export const pageQuery = graphql`
       edges {
         node {
           id
+          fields {
+            slug
+          }
           frontmatter {
             title
             layout
             path
-            date
+            date(formatString: "MMMM DD, YYYY")
           }
         }
       }
