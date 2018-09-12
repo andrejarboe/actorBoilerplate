@@ -1,18 +1,33 @@
 module.exports = {
   siteMetadata: {
-    title: 'Actor Website',
+    title: "Gatsby Default Starter",
+    desc: "A new blog"
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-catch-links',
+    "gatsby-plugin-react-helmet",
+    "gatsby-plugin-styled-components",
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
-        path: `${__dirname}/content`,
-        name: 'content',
-      },
+        name: "src",
+        path: `${__dirname}/content/`
+      }
     },
-    'gatsby-transformer-remark',
-    'gatsby-plugin-netlify-cms'
-  ],
-}
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "img",
+        path: `${__dirname}/src/images`
+      }
+    },
+    {
+      resolve: "gatsby-transformer-remark",
+      options: {
+        excerpt_separator: `<!-- end -->`
+      }
+    },
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-sharp",
+    "gatsby-plugin-netlify-cms"
+  ]
+};
