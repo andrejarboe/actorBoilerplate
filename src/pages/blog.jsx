@@ -19,7 +19,8 @@ const BlogPage = ({ data }) => (
             <hr />
           </div>
         )
-      } else {
+      } 
+      else {
         return <h3>No blog Post</h3>
       }
     })}

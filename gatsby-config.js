@@ -6,12 +6,19 @@ module.exports = {
   plugins: [
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-styled-components",
+    // {
+    //   resolve: "gatsby-source-filesystem",
+    //   options: {
+    //     name: "src",
+    //     path: `${__dirname}/src/content/`
+    //   }
+    // },
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: "src",
-        path: `${__dirname}/src/content/`
-      }
+        path: `${__dirname}/src/pages`,
+        name: 'pages',
+      },
     },
     {
       resolve: "gatsby-source-filesystem",
